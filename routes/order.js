@@ -8,7 +8,7 @@ const multer = require('../middleware/multer-config');
 const orderCtrl = require('../controllers/order');
 // adminstration
 router.get('/', auth, orderCtrl.getAllOrder);
-router.post('/', auth, multer, orderCtrl.createOrder);
+router.post('/', auth,  orderCtrl.createOrder);
 router.get('/:id', auth, orderCtrl.getOneOrder);
 router.put('/:id', auth, orderCtrl.modifyOrder);
 router.delete('/:id', auth, orderCtrl.deleteOrder);

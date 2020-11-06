@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const Customer = require('../models/customer')
 
 exports.createOrder = (req, res, next) => {
 
@@ -6,6 +7,7 @@ exports.createOrder = (req, res, next) => {
         reference: req.body.reference,
         customerId: req.body.customerId,
         totalPrice: req.body.totalPrice,
+        products: []
     });
 
     order.save().then(() => {
