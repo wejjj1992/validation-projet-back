@@ -1,7 +1,6 @@
 const Product = require('../models/product');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
-const shortid = require('shortid');
 
 exports.createProduct = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -76,9 +75,6 @@ exports.deleteProduct = (req, res, next) => {
 };
 
 exports.getAllProduct = (req, res, next) => {
-
-    console.log(shortid.generate())
-
     Product.find().then((products) => {
         res.status(200).json(products);
     }).catch((error) => {

@@ -5,10 +5,8 @@ const orderSchema = mongoose.Schema({
     reference: { type: String, required: true, 'default': shortid.generate() },
     customerId: { type: String, required: true },
     totalPrice: { type: Number, required: true },
-    products: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-    }]
+    products: [],
+    dateCreated: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('Order', orderSchema);

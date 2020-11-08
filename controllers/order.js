@@ -1,13 +1,14 @@
 const Order = require('../models/order');
 const Customer = require('../models/customer')
+const jwt = require('jsonwebtoken');
 
 exports.createOrder = (req, res, next) => {
-
+    console.log(req.body)
     const order = new Order({
         reference: req.body.reference,
         customerId: req.body.customerId,
         totalPrice: req.body.totalPrice,
-        products: []
+        products: req.body.products
     });
 
     order.save().then(() => {
@@ -66,6 +67,21 @@ exports.deleteOrder = (req, res, next) => {
 
 exports.getAllOrder = (req, res, next) => {
     Order.find().then((orders) => {
+        res.status(200).json(orders);
+    }).catch((error) => {
+        res.status(400).json({
+            error: error
+        });
+    });
+};
+
+
+exports.getOrdersByCustomer = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const customerId = decodedToken.customerId;
+
+    Order.find({ customerId: customerId }).then((orders) => {
         res.status(200).json(orders);
     }).catch((error) => {
         res.status(400).json({

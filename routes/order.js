@@ -13,6 +13,7 @@ router.get('/:id', auth, orderCtrl.getOneOrder);
 router.put('/:id', auth, orderCtrl.modifyOrder);
 router.delete('/:id', auth, orderCtrl.deleteOrder);
 // boutique
+router.get('/b/cutomer/', authCustomer, orderCtrl.getOrdersByCustomer);
 router.post('/b/', authCustomer, orderCtrl.createOrder);
 router.get('/b/:id', authCustomer, orderCtrl.getOneOrder);
 
